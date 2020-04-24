@@ -1,29 +1,35 @@
 package application;
 	
+import java.sql.SQLException;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 
 public class Main extends Application {
+	boolean loggged = false;
+	Scene main ;
 	@Override
 	public void start(Stage primaryStage) {
+		primaryStage.initStyle(StageStyle.UNDECORATED);
 		try {
-			StackPane root = new StackPane();
-			Label lbl = new Label();
-			Login user = new Login();
-			boolean flag = user.isDbConnected();
-			if (flag) {
-				lbl.setText("Connected");
-			} else {
-				lbl.setText("Not Connected");
-			}
-			root.getChildren().addAll(lbl);
-			Scene scene = new Scene(root,400,400);
-			primaryStage.setScene(scene);
+			LoginUI log =new LoginUI();
+			log.start(primaryStage);
+			primaryStage.setScene(log.scene);
 			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();
